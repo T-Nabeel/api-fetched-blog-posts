@@ -1,16 +1,23 @@
-# epitcore-test
+# Simple Blog Post Renderer using Vue and an API
 
-This template should help get you started developing with Vue 3 in Vite.
+## Goal of the project
 
-## Recommended IDE Setup
+- Retrieve blog posts from an API
+- Create a filter functionality to filter posts
+- Have an option to view the posts in detail view
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Links
 
-## Customize configuration
+- Live Demo URL: [Add solution URL here](https://your-solution-url.com)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Built with
+
+- VueJS
+- SASS
 
 ## Project Setup
+
+### Install dependencies
 
 ```sh
 npm install
@@ -27,15 +34,3 @@ npm run dev
 ```sh
 npm run build
 ```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-
-# Extra details
-
-https://dummyapi.online/
-https://dummyapi.online/api/blogposts
-https://dribbble.com/shots/20282472-Simple-Blog
