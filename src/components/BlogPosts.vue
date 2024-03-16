@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
+import { RouterLink, RouterView } from 'vue-router'
 import "animate.css";
 
 import BlogCard from "./BlogCard.vue";
@@ -34,12 +35,6 @@ const truncateContent = (content) => {
 // Fetch data on component mount
 onMounted(fetchData);
 
-defineProps({
-  msg: {
-    type: String,
-    required: true,
-  },
-});
 </script>
 
 <template>
@@ -139,12 +134,14 @@ defineProps({
           :key="post.id"
           class="animate__animated animate__fadeIn animate__faster"
         >
+        <router-link :to="{ name: 'post', params: { id: post.id } }">
           <BlogCard>
             <template #blog-title>{{ post.title }}</template>
             <template #blog-author>{{ post.author }}</template>
             <template #blog-date>{{ post.date_published }}</template>
             <template #blog-content>{{ truncateContent(post.content) }}</template>
           </BlogCard>
+        </router-link>
         </li>
       </ul>
     </div>

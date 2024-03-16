@@ -1,10 +1,9 @@
 <script setup>
-import BlogPosts from "@/components/BlogPosts.vue";
+import SingleBlogPost from "@/components/SingleBlogPost.vue";
 </script>
-
 <template>
   <main>
-    <BlogPosts />
+    <SingleBlogPost />
   </main>
 </template>
 

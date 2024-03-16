@@ -1,10 +1,12 @@
 <template>
   <div class="blog-card">
-    <img
-      src="../assets/pexels-blog.jpg"
-      alt="blog-placeholder-image"
-      class="blog-card__img"
-    />
+    <div class="blog-card__img__container">
+      <img
+        src="../assets/pexels-blog.jpg"
+        alt="blog-placeholder-image"
+        class="blog-card__img"
+      />
+    </div>
     <h3 class="blog-card__title"><slot name="blog-title"></slot></h3>
     <div class="blog-card__meta">
       <p class="blog-card__author"><slot name="blog-author"></slot></p>
@@ -29,18 +31,27 @@
 .blog-card {
   border-radius: 10px;
 
+  &:hover .blog-card__img {
+    transform: scale(1.05);
+  }
+
+  &__img__container {
+    overflow: hidden;
+    height: 18rem;
+  }
+
   &__img {
     border-radius: 2px;
     width: 100%;
-  height: 18rem;
-  object-fit: cover;
-  object-position: 50% 5%;
+    object-fit: cover;
+    object-position: 50% 5%;
+    transition: 0.3s all ease-in-out;
   }
 
   &__title {
     color: #181818;
     font-size: 1.4375rem;
-    margin: 0.5rem 0 0.4rem 0;
+    margin: 1rem 0 0.4rem 0;
   }
 
   &__meta {
