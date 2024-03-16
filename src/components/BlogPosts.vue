@@ -27,6 +27,10 @@ const filteredPosts = computed(() => {
   return posts.value.filter((post) => post.author === selectedAuthor.value);
 });
 
+const truncateContent = (content) => {
+  return content.split(" ").slice(0, 10).join(" ") + " ...";
+}
+
 // Fetch data on component mount
 onMounted(fetchData);
 
@@ -139,7 +143,7 @@ defineProps({
             <template #blog-title>{{ post.title }}</template>
             <template #blog-author>{{ post.author }}</template>
             <template #blog-date>{{ post.date_published }}</template>
-            <template #blog-content>{{ post.content }}</template>
+            <template #blog-content>{{ truncateContent(post.content) }}</template>
           </BlogCard>
         </li>
       </ul>
