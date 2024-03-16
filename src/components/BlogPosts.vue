@@ -1,99 +1,151 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import 'animate.css'
+import { ref, onMounted, computed } from "vue";
+import "animate.css";
 
-const posts = ref([])
-const selectedAuthor = ref('')
+import BlogCard from "./BlogCard.vue";
+
+const posts = ref([]);
+const selectedAuthor = ref("");
+const activeAuthor = ref("");
 
 const fetchData = async () => {
   try {
-    const response = await fetch('https://dummyapi.online/api/blogposts')
+    const response = await fetch("https://dummyapi.online/api/blogposts");
     if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`)
+      throw new Error(`API request failed with status ${response.status}`);
     }
-    const data = await response.json()
+    const data = await response.json();
     // Create a copy of the data (recommended)
-    posts.value = [...data]
+    posts.value = [...data];
   } catch (error) {
-    console.error('Error fetching data:', error)
+    console.error("Error fetching data:", error);
   }
-}
+};
 
 const filteredPosts = computed(() => {
-  if (!selectedAuthor.value) return posts.value // Return all posts if no author selected
-  return posts.value.filter((post) => post.author === selectedAuthor.value)
-})
+  if (!selectedAuthor.value) return posts.value; // Return all posts if no author selected
+  return posts.value.filter((post) => post.author === selectedAuthor.value);
+});
 
 // Fetch data on component mount
-onMounted(fetchData)
+onMounted(fetchData);
 
 defineProps({
   msg: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 </script>
 
 <template>
   <div>
-    <h1 class="green">{{ msg }}</h1>
     <div v-if="posts.length">
-      <h2>Fetched Posts:</h2>
+      <div class="filter-area">
+        <p>Filter posts by author:</p>
 
-      <div class="filter-buttons">
-        <button @click="selectedAuthor = 'Tim Burton'">Tim Burton</button>
-        <button @click="selectedAuthor = 'Sophia Carter'">Sophia Carter</button>
-        <button @click="selectedAuthor = 'John Seele'">John Seele</button>
-        <button @click="selectedAuthor = 'James Brown'">James Brown</button>
-        <button @click="selectedAuthor = ''">Clear Filter</button>
+        <div class="filter-area__buttons">
+          <div class="filter-area__buttons__authors">
+            <button
+              @click="
+                selectedAuthor = 'Tim Burton';
+                activeAuthor = 'Tim Burton';
+              "
+              :class="{ active: activeAuthor === 'Tim Burton' }"
+              class="filter-area__buttons--default"
+            >
+              Tim Burton
+            </button>
+            <button
+              @click="
+                selectedAuthor = 'Sophia Carter';
+                activeAuthor = 'Sophia Carter';
+              "
+              :class="{ active: activeAuthor === 'Sophia Carter' }"
+              class="filter-area__buttons--default"
+            >
+              Sophia Carter
+            </button>
+            <button
+              @click="
+                selectedAuthor = 'John Seele';
+                activeAuthor = 'John Seele';
+              "
+              :class="{ active: activeAuthor === 'John Seele' }"
+              class="filter-area__buttons--default"
+            >
+              John Seele
+            </button>
+            <button
+              @click="
+                selectedAuthor = 'Alex Johnson';
+                activeAuthor = 'Alex Johnson';
+              "
+              :class="{ active: activeAuthor === 'Alex Johnson' }"
+              class="filter-area__buttons--default"
+            >
+              Alex Johnson
+            </button>
+            <button
+              @click="
+                selectedAuthor = 'James Brown';
+                activeAuthor = 'James Brown';
+              "
+              :class="{ active: activeAuthor === 'James Brown' }"
+              class="filter-area__buttons--default"
+            >
+              James Brown
+            </button>
+            <button
+              @click="
+                selectedAuthor = 'Michael Brown';
+                activeAuthor = 'Michael Brown';
+              "
+              :class="{ active: activeAuthor === 'Michael Brown' }"
+              class="filter-area__buttons--default"
+            >
+              Michael Brown
+            </button>
+            <button
+              @click="
+                selectedAuthor = 'Lois Lane';
+                activeAuthor = 'Lois Lane';
+              "
+              :class="{ active: activeAuthor === 'Lois Lane' }"
+              class="filter-area__buttons--default"
+            >
+              Lois Lane
+            </button>
+          </div>
+          <button
+            @click="
+              selectedAuthor = '';
+              activeAuthor = '';
+            "
+            class="clear-btn"
+          >
+            Clear Filter
+          </button>
+        </div>
       </div>
 
       <ul class="posts">
-        <!-- <li v-for="post in filteredPosts" :key="post.id">
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.author }}</p>
-          <p>{{ post.content }}</p>
-        </li> -->
-        <!-- <transition-group name="list" tag="ul" class="posts"> -->
         <li
           v-for="post in filteredPosts"
           :key="post.id"
           class="animate__animated animate__fadeIn animate__faster"
         >
-        <img src="../assets/pexels-blog.jpg" alt="Blog image" class="blog-img">
-          <h3>{{ post.title }}</h3>
-          <p class="author">{{ post.author }}</p>
-          <p>{{ post.content }}</p>
+          <BlogCard>
+            <template #blog-title>{{ post.title }}</template>
+            <template #blog-author>{{ post.author }}</template>
+            <template #blog-date>{{ post.date_published }}</template>
+            <template #blog-content>{{ post.content }}</template>
+          </BlogCard>
         </li>
-        <!-- </transition-group> -->
       </ul>
     </div>
     <p v-else>Loading data...</p>
   </div>
 </template>
 
-<style scoped>
-button {
-  padding: 12px 32px;
-  font-size: 16px;
-  border-radius: 8px;
-}
-
-.filter-buttons button {
-  padding: 8px 16px;
-  margin-right: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #f5f5f5;
-}
-
-.filter-buttons button.active {
-  background-color: #eee;
-}
-
-/* .list-move {
-  transition: transform 200ms;
-} */
-</style>
+<style scoped></style>
