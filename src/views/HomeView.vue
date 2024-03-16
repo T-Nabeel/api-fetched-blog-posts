@@ -1,9 +1,10 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import BlogPosts from "@/components/BlogPosts.vue";
 </script>
-
 <template>
   <main>
-    <TheWelcome />
+    <BlogPosts />
   </main>
 </template>
+
+<style lang="scss" scoped></style>

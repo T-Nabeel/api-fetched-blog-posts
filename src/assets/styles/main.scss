@@ -1,0 +1,19 @@
+@use './variables';
+@use './globals';
+
+
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.blog-img {
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
+  object-position: 50% 5%;
+}
+
+.author {
+  color: variables.$fontColorLight;
+}

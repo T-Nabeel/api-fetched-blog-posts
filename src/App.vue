@@ -1,21 +1,14 @@
 <script setup>
 // import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import  HomeHero from "./components/HomeHero.vue"
+import BlogPosts from "./components/BlogPosts.vue"
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld msg="Posts" />
-
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
-    </div>
-  </header>
-
-  <!-- <RouterView /> -->
+  <div class="container">
+    <HomeHero title="Blog Post"/>
+    <BlogPosts/>
+  </div>
 </template>
 
 <style scoped></style>
