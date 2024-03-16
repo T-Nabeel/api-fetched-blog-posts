@@ -8,7 +8,7 @@
 
 ## Links
 
-- Live Demo URL: [Add solution URL here](https://your-solution-url.com)
+- Live Demo URL: [Simple Blog Post](https://t-nabeel.github.io/api-fetched-blog-posts/)
 
 ## Built with
 
