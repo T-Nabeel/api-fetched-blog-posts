@@ -1,0 +1,19 @@
+// Breakpoints
+
+// Default -> Mobile
+$tabletWidth: 768px;
+$desktopWidth: 1024px;
+
+// Tablet device
+@mixin onTablet {
+  @media screen and (min-width: $tabletWidth) {
+    @content;
+  }
+}
+
+// Desktop devices
+@mixin onDesktop {
+  @media screen and (min-width: $desktopWidth) {
+    @content;
+  }
+}
