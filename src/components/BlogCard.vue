@@ -28,16 +28,23 @@
 </template>
 
 <style lang="scss" scoped>
+@use "../assets/styles/breakpoints";
+
 .blog-card {
   border-radius: 10px;
 
+  // Card hover style
   &:hover .blog-card__img {
     transform: scale(1.05);
   }
 
   &__img__container {
     overflow: hidden;
-    height: 18rem;
+
+    // Desktop styles
+    @include breakpoints.onDesktop {
+      height: 18rem;
+    }
   }
 
   &__img {
@@ -49,9 +56,20 @@
   }
 
   &__title {
+    // Mobile styles
     color: #181818;
     font-size: 1.4375rem;
-    margin: 1rem 0 0.4rem 0;
+    margin-top: 0.5rem;
+
+    // Tablet styles
+    @include breakpoints.onTablet {
+      // margin-top: 5rem;
+    }
+
+    // Desktop styles
+    @include breakpoints.onDesktop {
+      margin: 1rem 0 0.4rem 0;
+    }
   }
 
   &__meta {

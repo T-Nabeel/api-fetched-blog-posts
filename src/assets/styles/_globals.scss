@@ -1,5 +1,6 @@
 // Styles import
 @use "./variables";
+@use "./breakpoints";
 
 // Font import
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
@@ -35,10 +36,17 @@ button {
 a {
   text-decoration: none;
 }
-// on mobile use svh
 
 // Global styles
 .container {
-  max-width: 1500px;
+  max-width: 90vw;
   margin: auto;
+
+  @include breakpoints.onTablet {
+  }
+
+  @include breakpoints.onDesktop {
+    width: 85vw;
+    max-width: 1500px;
+  }
 }

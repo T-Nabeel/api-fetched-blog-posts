@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from "vue-router";
 import "animate.css";
 
 import BlogCard from "./BlogCard.vue";
@@ -8,6 +8,7 @@ import BlogCard from "./BlogCard.vue";
 const posts = ref([]);
 const selectedAuthor = ref("");
 const activeAuthor = ref("");
+const error = ref("");
 
 const fetchData = async () => {
   try {
@@ -16,10 +17,11 @@ const fetchData = async () => {
       throw new Error(`API request failed with status ${response.status}`);
     }
     const data = await response.json();
-    // Create a copy of the data (recommended)
+    // Create a copy of the data
     posts.value = [...data];
-  } catch (error) {
-    console.error("Error fetching data:", error);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    error.value = err.toString();
   }
 };
 
@@ -30,11 +32,10 @@ const filteredPosts = computed(() => {
 
 const truncateContent = (content) => {
   return content.split(" ").slice(0, 10).join(" ") + " ...";
-}
+};
 
 // Fetch data on component mount
 onMounted(fetchData);
-
 </script>
 
 <template>
@@ -134,18 +135,23 @@ onMounted(fetchData);
           :key="post.id"
           class="animate__animated animate__fadeIn animate__faster"
         >
-        <router-link :to="{ name: 'post', params: { id: post.id } }">
-          <BlogCard>
-            <template #blog-title>{{ post.title }}</template>
-            <template #blog-author>{{ post.author }}</template>
-            <template #blog-date>{{ post.date_published }}</template>
-            <template #blog-content>{{ truncateContent(post.content) }}</template>
-          </BlogCard>
-        </router-link>
+          <RouterLink :to="{ name: 'post', params: { id: post.id } }">
+            <BlogCard>
+              <template #blog-title>{{ post.title }}</template>
+              <template #blog-author>{{ post.author }}</template>
+              <template #blog-date>{{ post.date_published }}</template>
+              <template #blog-content>{{
+                truncateContent(post.content)
+              }}</template>
+            </BlogCard>
+          </RouterLink>
         </li>
       </ul>
     </div>
-    <p v-else>Loading data...</p>
+    <div class="network-msg">
+      <p v-if="error" style="color: red">{{ error }}</p>
+      <p v-else-if="!posts.length">Loading data...</p>
+    </div>
   </div>
 </template>
 
